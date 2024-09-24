@@ -164,9 +164,14 @@ function useCreatePost() {
       const userDocRef = doc(firestore, "users", authUser.uid);
       const imageRef = ref(storage, `posts/${postDocRef.id}`);
       await updateDoc(userDocRef, { posts: arrayUnion(postDocRef.id) });
+
       await uploadString(imageRef, selectedFile, "data_url");
       const downloadURL = await getDownloadURL(imageRef);
       await updateDoc(postDocRef, { imageURL: downloadURL });
+
+      console.log("authUser:", authUser);
+      console.log("userDocRef:", userDocRef);
+      console.log("postDocRef:", postDocRef);
 
       newPost.imgURL = downloadURL;
       createPost({ ...newPost, id: postDocRef.id });
