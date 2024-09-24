@@ -11,6 +11,7 @@ function useLogin() {
 
   const loginUser = useAuthStore((state) => state.login);
 
+
   const login = async (inputs) => {
     if (!inputs.email || !inputs.password) {
       return showToast("Error", "Please fill all the fields", "error");
