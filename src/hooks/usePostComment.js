@@ -24,7 +24,7 @@ function usePostComment() {
     };
     try {
       await updateDoc(doc(firestore, "posts", postId), {
-        comment: arrayUnion(newComment),
+        comments: arrayUnion(newComment),
       });
 
       addComment(postId, newComment);
